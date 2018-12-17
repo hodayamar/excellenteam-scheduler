@@ -9,7 +9,7 @@ public:
 
     virtual void run() = 0;
     virtual unsigned long getNextRunPeriod() = 0; // in milliseconds
-
+    virtual ~ITask(){};
 private:
 
     unsigned long TaskPeriod;
@@ -24,6 +24,7 @@ public:
     ITask_printer(unsigned long);
     void run();
     unsigned long getNextRunPeriod(); // in milliseconds
+    ~ITask_printer(){}
 
 private:
 
@@ -35,6 +36,7 @@ class ITask_McAfee :public ITask
 public:
 
     ITask_McAfee(unsigned long);
+    ~ITask_McAfee(){}
     void run();
     unsigned long getNextRunPeriod(); // in milliseconds
 
@@ -48,6 +50,8 @@ class ITask_VMware :public ITask
 public:
 
     ITask_VMware(unsigned long);
+    ~ITask_VMware(){}
+
     void run();
     unsigned long getNextRunPeriod(); // in milliseconds
 

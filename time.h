@@ -4,9 +4,12 @@
 #include <ctime>
 #include <iostream>
 
+typedef struct timespec timespec;
+
 class Time
 {
 public:
+
 
     Time(unsigned long);
 
@@ -17,7 +20,7 @@ public:
 
 private:
 
-    long time_task;
+    timespec time_task;
 
 };
 
