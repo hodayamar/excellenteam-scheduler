@@ -8,30 +8,29 @@ class ITask
 public:
 
     virtual void run() = 0;
-    virtual unsigned long getNextRunPeriod() = 0; // in milliseconds
     virtual ~ITask(){};
+    virtual unsigned long getNextRunPeriod() = 0; // in milliseconds
+
 private:
 
     unsigned long TaskPeriod;
 };
 
-
-
-class ITask_printer :public ITask
+class ITask_printer : public ITask
 {
 public:
 
     ITask_printer(unsigned long);
+    ~ITask_printer(){};
     void run();
     unsigned long getNextRunPeriod(); // in milliseconds
-    ~ITask_printer(){}
 
 private:
 
     unsigned long TaskPeriod;
 };
 
-class ITask_McAfee :public ITask
+class ITask_McAfee : public ITask
 {
 public:
 

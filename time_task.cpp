@@ -6,6 +6,7 @@ Time::Time(unsigned long task_period)
     clk_id = CLOCK_REALTIME;
     clock_gettime(clk_id, &time_task);
 
+    task_period *= 1000000;
     task_period += time_task.tv_nsec;
 
     time_task.tv_nsec = task_period % 1000000000;
