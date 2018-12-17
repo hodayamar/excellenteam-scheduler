@@ -1,11 +1,12 @@
 #ifndef EXCELLENTEAM_ELLA_CONCURRENCY_SCHEDULER_HODAYAMA_ITASK_H
 #define EXCELLENTEAM_ELLA_CONCURRENCY_SCHEDULER_HODAYAMA_ITASK_H
 
+
+
 class ITask
 {
 public:
 
-    ITask(unsigned long);
     virtual void run() = 0;
     virtual unsigned long getNextRunPeriod() = 0; // in milliseconds
 
