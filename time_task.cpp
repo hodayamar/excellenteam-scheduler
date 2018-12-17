@@ -1,4 +1,4 @@
-#include "time.h"
+#include "time_task.h"
 
 Time::Time(unsigned long task_period)
 {
@@ -26,7 +26,9 @@ bool Time::operator<(Time& other)
 {
     if (time_task.tv_sec == other.time_task.tv_sec)
         return time_task.tv_nsec < other.time_task.tv_nsec;
-    else
-        return time_task.tv_sec < other.time_task.tv_sec;
+
+    return time_task.tv_sec < other.time_task.tv_sec;
+
+
 }
 
