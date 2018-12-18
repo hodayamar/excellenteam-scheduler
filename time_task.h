@@ -15,8 +15,8 @@ public:
     Time(unsigned long);
 
     Time & operator+(unsigned long);
-    bool operator<(Time&);
-    bool operator==(Time&);
+    bool operator<(Time&)const;
+    void sleep()const;
     long operator-(Time&);
 
 

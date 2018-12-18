@@ -29,8 +29,12 @@ int Scheduler::run_tasks()
         (*temp)->run();
         return 0;
     }
+    Time time_to_sleep((*temp)-> getNextRunPeriod() / 1000);
 
-    usleep((*temp)-> getNextRunPeriod() * 1000);
+    //***********************************************************
+    //nanosleep(time_to_sleep.get_time(), NULL);
+    //***********************************************************
+
     (*temp)->run();
     return 0;
 

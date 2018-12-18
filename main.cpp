@@ -1,4 +1,3 @@
-#include <time.h>
 #include <iostream>
 #include "ITask.h"
 #include "Scheduler.h"
@@ -23,8 +22,10 @@ int main()
 
 //    Scheduler SH(tasks, 4);
 
-
-
+    std::cout << "before sleep" << std::endl;
+    Time t1(2000);
+    t1.sleep();
+    std::cout << "after sleep" << std::endl;
     return 0;
 
 }
