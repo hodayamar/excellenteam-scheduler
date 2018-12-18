@@ -2,6 +2,7 @@
 #define EXCELLENTEAM_ELLA_CONCURRENCY_SCHEDULER_HODAYAMA_ITASK_H
 
 
+#include <stdlib.h>
 
 class ITask
 {
@@ -11,8 +12,8 @@ public:
     virtual ~ITask(){};
     virtual unsigned long getNextRunPeriod() = 0; // in milliseconds
 
+    virtual unsigned long if_run_next() = 0;
 private:
-
     unsigned long TaskPeriod;
 };
 
@@ -26,7 +27,7 @@ public:
     unsigned long getNextRunPeriod(); // in milliseconds
 
 private:
-
+    unsigned long if_run_next();
     unsigned long TaskPeriod;
 };
 
@@ -39,8 +40,8 @@ public:
     void run();
     unsigned long getNextRunPeriod(); // in milliseconds
 
+    unsigned long if_run_next();
 private:
-
     unsigned long TaskPeriod;
 };
 
@@ -54,8 +55,8 @@ public:
     void run();
     unsigned long getNextRunPeriod(); // in milliseconds
 
+    unsigned long if_run_next();
 private:
-
     unsigned long TaskPeriod;
 };
 

@@ -18,6 +18,7 @@ public:
     bool operator<(Time&)const;
     void sleep()const;
     long operator-(Time&);
+    Time & operator=(unsigned long);
 
 
 private:

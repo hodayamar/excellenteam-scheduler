@@ -14,3 +14,9 @@ unsigned long ITask_printer::getNextRunPeriod()
 {
     return TaskPeriod;
 }
+
+unsigned long ITask_printer::if_run_next()
+{
+    TaskPeriod = (rand() % 10) * 1000;
+    return TaskPeriod;
+}

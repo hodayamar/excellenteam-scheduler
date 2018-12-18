@@ -7,25 +7,26 @@ using namespace std;
 int main()
 {
 
-//    ITask tasks[4];
-//
-//    ITask_printer * print_a = new ITask_printer(4);
-//    tasks[1] = print_a;
-//    ITask_VMware VMware(14);
-//    ITask_McAfee McAfee(20);
-//    ITask_printer print_b(25);
+    std::cout << "im in main" << std::endl;
 
-//    tasks[0] = print_a;
-////    tasks[1] = &VMware;
-////    tasks[2] = &McAfee;
-////    tasks[3] = &print_b;
+    Scheduler schlr;
 
-//    Scheduler SH(tasks, 4);
+    ITask_printer * print_a = new ITask_printer(2000);
+    ITask_McAfee * McAfee = new ITask_McAfee(6000);
+    ITask_printer * print_c = new ITask_printer(10000);
+    ITask_printer * print_b = new ITask_printer(8000);
+    ITask_McAfee * McAfee_b = new ITask_McAfee(12000);
 
-    std::cout << "before sleep" << std::endl;
-    Time t1(2000);
-    t1.sleep();
-    std::cout << "after sleep" << std::endl;
+    schlr.append(print_a);
+    schlr.append(McAfee_b);
+    schlr.append(McAfee);
+    schlr.append(print_c);
+    schlr.append(print_b);
+
+    schlr.run_tasks();
+
+    std::cout << "after" << std::endl;
+
     return 0;
 
 }

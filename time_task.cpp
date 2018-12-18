@@ -45,13 +45,12 @@ bool Time::operator<(Time& other)const
 
 void Time::sleep()const
 {
-    std::cout << "Time::sleep()"<< std::endl;
     timespec delta;
     clockid_t clk_id = CLOCK_REALTIME;
     clock_gettime(clk_id, &delta);
 
     if (time_task.tv_sec < delta.tv_sec || (time_task.tv_sec == delta.tv_sec && time_task.tv_nsec < delta.tv_nsec)){
-        std::cout << "not going to sleep" <<std::endl;
+//        std::cout << "not going to sleep" <<std::endl;
         return;
     }
     delta.tv_sec = time_task.tv_sec - delta.tv_sec - 1;
@@ -60,7 +59,21 @@ void Time::sleep()const
     delta.tv_sec += temp / 1000000000;
     delta.tv_nsec = temp % 1000000000;
 
-    std::cout << "going to sleep for "<< delta.tv_sec << "." << delta.tv_nsec << std::endl;
+//    std::cout << "going to sleep for "<< delta.tv_sec << "." << delta.tv_nsec << std::endl;
     nanosleep(&delta,NULL);
 }
 
+Time & Time::operator=(unsigned long next_period){
+
+    clockid_t clk_id;
+    clk_id = CLOCK_REALTIME;
+    clock_gettime(clk_id, &time_task);
+
+    next_period *= 1000000;
+    next_period += time_task.tv_nsec;
+
+    time_task.tv_nsec = next_period % 1000000000;
+    time_task.tv_sec += next_period / 1000000000;
+
+    return *this;
+}

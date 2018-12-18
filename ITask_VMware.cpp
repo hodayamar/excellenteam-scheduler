@@ -14,3 +14,10 @@ unsigned long ITask_VMware::getNextRunPeriod()
 {
     return TaskPeriod;
 }
+
+unsigned long ITask_VMware::if_run_next()
+{
+    TaskPeriod = (rand() % 10) * 1000;
+
+    return TaskPeriod;
+}

@@ -1,50 +1,69 @@
 #include "Scheduler.h"
 #include <algorithm>
-#include <iostream>
 
 
-Scheduler::Scheduler(ITask *tasks, unsigned int length)
-{
 
-   while(length--)
-   {
-
-       m_tasks.push_back(std::make_pair(shared_ptr<ITask>(tasks), tasks->getNextRunPeriod()));
-       tasks++;
-   }
-    std::make_heap(m_tasks.begin(),m_tasks.end());
-}
 
 bool operator<( tasks_pairs A,  tasks_pairs B)
 {
     return !(A.second < B.second);
 }
 
-int Scheduler::run_tasks()
+
+Scheduler::Scheduler()
 {
-    shared_ptr<ITask>* temp = get_next_task();
+    std::pop_heap (m_tasks.begin(),m_tasks.end());
+}
 
-    if((*temp)->getNextRunPeriod())
-    {
-        (*temp)->run();
-        return 0;
-    }
-    Time time_to_sleep((*temp)-> getNextRunPeriod() / 1000);
+void Scheduler::append(ITask * task)
+{
 
-    //***********************************************************
-    //nanosleep(time_to_sleep.get_time(), NULL);
-    //***********************************************************
-
-    (*temp)->run();
-    return 0;
+    m_tasks.push_back (std::make_pair(shared_ptr<ITask>(task), task->getNextRunPeriod()));
+    std::push_heap (m_tasks.begin(),m_tasks.end());
 
 }
 
-shared_ptr<ITask>* Scheduler::get_next_task()
+void Scheduler::next_task_period_handler(tasks_pairs* temp)
 {
-   shared_ptr<ITask>* temp = new shared_ptr<ITask>(m_tasks.front().first);
-    pop_heap(m_tasks.begin(), m_tasks.end());
-    return temp;
+    unsigned long next_period = (*(*temp).first).if_run_next();
+    if(next_period == 0)
 
+        m_tasks.pop_back();
+
+    else
+    {
+        ((*temp).second) = next_period;
+        std::sort_heap (m_tasks.begin(),m_tasks.end());
+    }
+}
+
+int Scheduler::run_tasks()
+{
+    tasks_pairs* temp;
+
+    while(!m_tasks.empty())
+    {
+        temp = get_next_task();
+        ((*temp).second).sleep();
+        (*(*temp).first).run();
+
+        next_task_period_handler(temp);
+
+    }
+
+    return 0;
+}
+
+tasks_pairs* Scheduler::get_next_task()
+{
+
+    pop_heap(m_tasks.begin(), m_tasks.end());
+    tasks_pairs * temp = &m_tasks.back();
+
+    std::cout  << std::endl;
+    std::cout  << std::endl;
+
+
+    return temp;
 }
 
