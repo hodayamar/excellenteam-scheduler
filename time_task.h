@@ -3,6 +3,7 @@
 
 #include <time.h>
 #include <iostream>
+#include <unistd.h>
 
 typedef struct timespec timespec;
 
@@ -16,6 +17,7 @@ public:
     Time & operator+(unsigned long);
     bool operator<(Time&);
     bool operator==(Time&);
+    long operator-(Time&);
 
 
 private:

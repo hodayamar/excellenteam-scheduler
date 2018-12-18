@@ -22,8 +22,18 @@ bool operator<( tasks_pairs A,  tasks_pairs B)
 
 int Scheduler::run_tasks()
 {
-    (*get_next_task())->run();
+    shared_ptr<ITask>* temp = get_next_task();
+
+    if((*temp)->getNextRunPeriod())
+    {
+        (*temp)->run();
+        return 0;
+    }
+
+    usleep((*temp)-> getNextRunPeriod() * 1000);
+    (*temp)->run();
     return 0;
+
 }
 
 shared_ptr<ITask>* Scheduler::get_next_task()

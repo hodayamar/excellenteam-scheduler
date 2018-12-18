@@ -8,12 +8,13 @@ using namespace std;
 int main()
 {
 
-    ITask tasks[4];
-
-    ITask_printer print_a(4);
-    ITask_VMware VMware(14);
-    ITask_McAfee McAfee(20);
-    ITask_printer print_b(25);
+//    ITask tasks[4];
+//
+//    ITask_printer * print_a = new ITask_printer(4);
+//    tasks[1] = print_a;
+//    ITask_VMware VMware(14);
+//    ITask_McAfee McAfee(20);
+//    ITask_printer print_b(25);
 
 //    tasks[0] = print_a;
 ////    tasks[1] = &VMware;
